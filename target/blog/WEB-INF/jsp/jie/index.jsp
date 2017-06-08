@@ -41,7 +41,7 @@
           <a href="${pageContext.request.contextPath}/jie/solved/" <c:if test="${pageType=='solved' }"> class="tab-this" </c:if>>已采纳</a>
           <a href="${pageContext.request.contextPath}/jie/wonderful/" <c:if test="${pageType=='wonderful' }"> class="tab-this" </c:if>>精帖</a>
      	<c:if test="${currentUser.uid!=null }">
-          <a href="${pageContext.request.contextPath}/user/">我的帖</a>
+          <a href="${pageContext.request.contextPath}/user/index">我的帖</a>
      	</c:if>
         
         </span>
@@ -57,7 +57,7 @@
     	
     		 <li class="fly-list-li">
 				 <a href="${pageContext.request.contextPath}/u/${q.user.username }" class="fly-list-avatar">
-				       <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="${q.user.username }">
+				      <img src="${q.user.avtar}" alt="${q.user.username}">
 				 </a>
 				  <h2 class="fly-tip">
 				   <a href="${pageContext.request.contextPath}/jie/detail/${q.questionId}">${q.questionTiltle }</a>

@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>登入 - </title>
+<title>登入 - iLvc社区</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/global.css">
 
@@ -32,7 +32,7 @@
               <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label" >邮箱</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="text" id="L_email" name="email" required lay-verify="required|email" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
@@ -47,7 +47,7 @@
                   <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid">
-                  <span style="color: #c00;">{{d.vercode}}</span>
+                  <span id="ren" style="color: #c00;">${verification.qkey}</span>
                 </div>
               </div>
               <div class="layui-form-item">
@@ -70,7 +70,43 @@
   
 </div>
   <jsp:include page="../common/footer.jsp"></jsp:include>
-
+ <script type="text/javascript" src="${pageContext.request.contextPath}/resources/layui/layui.js"></script>
+  <script type="text/javascript">
+  layui.use(['form','jquery','element','layer'], function(){
+	  var element = layui.element(),form = layui.form(), $ = layui.jquery;
+	  var layer = layui.layer;
+	 
+	  
+	  
+	  $('#L_vercode').blur(function(){
+		  if(  $('#L_vercode').val().trim()!='${verification.qvalue}'){
+			layer.msg("人类验证失败");
+		  }else{
+			  $('#ren').text("验证通过！");
+		  }
+	  });
+	  
+	  form.on('submit',function(){
+		if( $('#username_jc').text()=='用户名不可用' ){
+			layer.msg("请检查后再提交!");
+			return false;
+		}
+		if( $('#pass_error').text()=='两次密码不一致！' ){
+			layer.msg("请检查后再提交!");
+			return false;
+		}
+		if($('#L_vercode').val().trim()!='${verification.qvalue}'){
+			layer.msg("请检查后再提交!");
+			return false;
+		}
+		
+	  });
+	  
+	});
+  
+  
+	      
+  </script>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>帐号设置 - ${currentUser.username}</title>
+<title>帐号设置 - iLvc社区</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/global.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/modules/layer/default/layer.css">

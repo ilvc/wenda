@@ -2,7 +2,8 @@ package me.ilvc.wenda.dao;
 
 import me.ilvc.wenda.model.Verification;
 
-public interface VerificationDao {
+public interface VerificationDao  extends BaseDao{
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Verification record);

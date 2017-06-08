@@ -16,7 +16,7 @@ var rows = d.rows;
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/global.css">
-<title>${question.questionTiltle } - iLvc社区</title>
+<title>${question.questionTiltle} - iLvc社区</title>
 <meta name="description" content="{{= d.description }}">
 
 </head>

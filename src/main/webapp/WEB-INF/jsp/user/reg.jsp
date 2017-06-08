@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>注册 - {{lay.base.name}}</title>
+<title>注册 - iLvc社区</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/global.css">
 
@@ -68,7 +68,7 @@
                   <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid">
-                  <span style="color: #c00;">{{d.vercode}}</span>
+                  <span id="ren" style="color: #c00;">${verification.qkey}</span>
                 </div>
               </div>
               <div class="layui-form-item">
@@ -97,12 +97,11 @@
 	  var layer = layui.layer;
 	 
 	  $('#L_username').blur(function(){
-		  var username={
-				  "username":$('#L_username').val()
-		  };
-		 $.get("${pageContext.request.contextPath}/ajax/username","username="+$('#L_username').val()+"",function(data){
-			 $('#username_jc').text(data);
-		 });
+		  if($('#L_username').val().trim()!=null && $('#L_username').val().trim()!=""){
+			 $.get("${pageContext.request.contextPath}/ajax/username","username="+$('#L_username').val()+"",function(data){
+				 $('#username_jc').text(data);
+			 });
+		  }
 	  });
 	  
 	  $('#L_repass').blur(function(){
@@ -114,7 +113,32 @@
 		  }
 	  });
 	  
-	 
+	  $('#L_vercode').blur(function(){
+		  if(  $('#L_vercode').val().trim()!='${verification.qvalue}'){
+			 //alert("密码不一致");
+			// $('#pass_error').text("两次密码不一致！");
+			layer.msg("人类验证失败");
+		  }else{
+			  $('#ren').text("验证通过！");
+		  }
+	  });
+	  
+	  form.on('submit',function(){
+		if( $('#username_jc').text()=='用户名不可用' ){
+			layer.msg("请检查后再提交!");
+			return false;
+		}
+		if( $('#pass_error').text()=='两次密码不一致！' ){
+			layer.msg("请检查后再提交!");
+			return false;
+		}
+		if($('#L_vercode').val().trim()!='${verification.qvalue}'){
+			layer.msg("请检查后再提交!");
+			return false;
+		}
+		
+	  });
+	  
 	});
   
   

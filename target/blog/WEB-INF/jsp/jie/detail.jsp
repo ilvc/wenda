@@ -16,7 +16,7 @@ var rows = d.rows;
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/global.css">
-<title>{{= rows.title}} - {{lay.base.name}}</title>
+<title>${question.questionTiltle } - iLvc社区</title>
 <meta name="description" content="{{= d.description }}">
 
 </head>
@@ -71,8 +71,8 @@ var rows = d.rows;
           </div>
         </div>
         <div class="detail-about">
-          <a class="jie-user" href="/u/{{168*rows.uid}}/">
-            <img src="{{rows.user.avatar}}" alt="{{rows.user.username}}">
+          <a class="jie-user" href="${pageContext.request.contextPath}/u/${question.user.username}">
+            <img src="${question.user.avtar}" alt="${question.user.username}">
             <cite>
             	${question.user.username}
             
@@ -116,8 +116,8 @@ var rows = d.rows;
           <li data-id="{{item.id}}" {{item.id == rows.accept ? 'class="jieda-daan"' : '' }}>
             <a name="item-{{item.time}}"></a>
             <div class="detail-about detail-about-reply">
-              <a class="jie-user" href="/u/{{168*item.user.id}}/">
-                <img src="{{item.user.avatar}}" alt="{{item.user.username}}">
+              <a class="jie-user" href="${pageContext.request.contextPath}/u/${qa.formuser.username }">
+                <img src="${qa.formuser.avtar }" alt="${qa.formuser.username }">
                 <cite>
                   <i>${qa.formuser.username}</i>
                  <!--  {{# if(item.user.rmb) { }}
@@ -181,7 +181,7 @@ var rows = d.rows;
 						<ul class="jieda photos" id="jieda">
 							<li data-id="36594"><a name="item-1496830707891"></a>
 								<div class="detail-about detail-about-reply">
-									<a class="jie-user" href="/u/2610384/"> <img
+									<a class="jie-user" href=""> <img
 										src="http://res.layui.com/images/fly/avatar/2.jpg" alt="狠狠亲一口"
 										layer-index="3"> <cite> <i>狠狠亲一口</i>
 									</cite>

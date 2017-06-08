@@ -22,9 +22,13 @@
 	       <a class="avatar" href="${pageContext.request.contextPath}/user/index">
 	       
 	      <!--   <img src="{{user.avatar}}"> -->
-	      
-	        <i class="iconfont icon-touxiang"></i>
+	      <c:if test="${currentUser.avtar!=null }">
+	         <img src="${currentUser.avtar}">
+	      </c:if>
 	       
+	       <c:if test="${currentUser.avtar==null}">
+	         <i class="iconfont icon-touxiang"></i>
+	      </c:if>
 	        <cite>${currentUser.username }</cite>
 	       
 	        <i></i>

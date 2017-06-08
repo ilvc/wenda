@@ -33,7 +33,7 @@ public class AjaxController {
 		User user = new User();
 		user.setUsername(username1);
 		String msg;
-		if(userService.findUser(user)!=null){
+		if(userService.findUser(user)!=null || username1=="" || username1==null){
 			mav.addObject("msg", "用户名不可用");
 			 msg ="用户名不可用";
 		}else{
@@ -47,7 +47,7 @@ public class AjaxController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return mav;
+		return null;
 	}
 	@ResponseBody
 	@RequestMapping(value={"/activate"},method=RequestMethod.GET)

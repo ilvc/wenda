@@ -3,7 +3,7 @@
 <mapper namespace="me.ilvc.wenda.dao.VerificationDao">
   <resultMap id="BaseResultMap" type="me.ilvc.wenda.model.Verification">
     <constructor>
-      <idArg column="id" javaType="java.lang.Integer"  jdbcType="INTEGER" />
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="qkey" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="qvalue" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>

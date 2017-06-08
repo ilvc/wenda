@@ -24,6 +24,7 @@ D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\dao\CategoryDao.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\dao\QuestionDao.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\dao\NoticeDao.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\model\Category.java
+D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\model\Verification.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\service\QuestionService.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\service\BaseService.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\model\UserAction.java
@@ -34,6 +35,7 @@ D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\dao\AnswerDao.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\util\EmailUtils.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\dto\UpImgResult.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\controller\IndexConrtoller.java
+D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\dao\VerificationDao.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\util\PropertiesUtil.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\model\PageBean.java
 D:\MyWork\biyesheji\wenda\src\main\java\me\ilvc\wenda\service\impl\QuestionServiceImpl.java

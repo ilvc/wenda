@@ -78,7 +78,7 @@
                 <div class="upload-img">
                   <input type="file" name="file" id="LAY-file" lay-title="上传头像">
                 </div>
-                <img id="avatar"  src="${pageContext.request.contextPath}/resources/images/avatar/11.jpg">
+                <img id="avatar"  src="${currentUser.avtar}">
                 <span class="loading"></span>
               </div>
             </div>
@@ -116,24 +116,26 @@
           <div class="layui-form layui-form-pane layui-tab-item">
             <ul class="app-bind">
               <li class="fly-msg  {{user.qq_id ? 'app-havebind' :''}}">
-                <i class="iconfont icon-qq"></i>
-                {{# if(user.qq_id){ }}
+               <%--  <i class="iconfont icon-qq"></i>
+                 <c:if test="${ currentUser.qq_id}">
                 <span>已成功绑定，您可以使用QQ帐号直接登录Fly社区，当然，您也可以</span>
                 <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
-                 {{# } else { }}
+                </c:if>
+                <c:if test="${currentUser.qq_id==null}">
                  <a href="http://fly.layui.com:8098/app/qq" onclick="layer.msg('正在绑定微博QQ', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
                  <span>，即可使用QQ帐号登录Fly社区</span>
-                 {{# } }}
+                </c:if>
               </li>
               <li class="fly-msg {{user.weibo_id ? 'app-havebind' :''}}">
                 <i class="iconfont icon-weibo"></i>
-                {{# if(user.weibo_id){ }}
+               <c:if test="${currentUser.web_id =null }">
                 <span>已成功绑定，您可以使用微博直接登录Fly社区，当然，您也可以</span>
                 <a href="javascript:;" class="acc-unbind" type="weibo_id">解除绑定</a>
-                {{# } else { }}
+                </c:if>
+                <c:if test="${currentUser.web_id!=null }">
                 <a href="http://fly.layui.com:8098/app/weibo/" class="acc-weibo" type="weibo_id"  onclick="layer.msg('正在绑定微博', {icon:16, shade: 0.1, time:0})" >立即绑定</a>
                 <span>，即可使用微博帐号登录Fly社区</span>
-                {{# } }}
+                </c:if> --%>
               </li>
             </ul>
           </div>
@@ -155,7 +157,7 @@
   
   	layui.use('upload', function(){
   	  layui.upload({
-  		 url: '${pageContext.request.contextPath}/upload'
+  		 url: '${pageContext.request.contextPath}/qiuniuupload'
  		    ,elem: '#LAY-file' //指定原始元素，默认直接查找class="layui-upload-file"
  		    ,method: 'post' //上传接口的http类型
  		    ,success: function(res){

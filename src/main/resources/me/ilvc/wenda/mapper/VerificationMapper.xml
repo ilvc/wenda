@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="me.ilvc.wenda.dao.VerificationMapper">
+<mapper namespace="me.ilvc.wenda.dao.VerificationDao">
   <resultMap id="BaseResultMap" type="me.ilvc.wenda.model.Verification">
     <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="key" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="value" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="id" javaType="java.lang.Integer"  jdbcType="INTEGER" />
+      <arg column="qkey" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="qvalue" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, key, value
+    id, qkey, qvalue
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="getById" parameterType="java.lang.Integer" resultType="me.ilvc.wenda.model.Verification">
     select 
     <include refid="Base_Column_List" />
     from verification
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  
+  <select id="countAll" resultType="Integer">
+  	select count(*) from verification;
+  </select>
+  
+  <delete id="deleteByPrimaryqkey" parameterType="java.lang.Integer">
     delete from verification
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="me.ilvc.wenda.model.Verification">
-    insert into verification (id, key, value
+    insert into verification (id, qkey, qvalue
       )
-    values (#{id,jdbcType=INTEGER}, #{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}
+    qvalues (#{id,jdbcType=INTEGER}, #{qkey,jdbcType=VARCHAR}, #{qvalue,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="me.ilvc.wenda.model.Verification">
@@ -33,41 +38,41 @@
       <if test="id != null">
         id,
       </if>
-      <if test="key != null">
-        key,
+      <if test="qkey != null">
+        qkey,
       </if>
-      <if test="value != null">
-        value,
+      <if test="qvalue != null">
+        qvalue,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    <trim prefix="qvalues (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="key != null">
-        #{key,jdbcType=VARCHAR},
+      <if test="qkey != null">
+        #{qkey,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        #{value,jdbcType=VARCHAR},
+      <if test="qvalue != null">
+        #{qvalue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="me.ilvc.wenda.model.Verification">
+  <update id="updateByPrimaryqkeySelective" parameterType="me.ilvc.wenda.model.Verification">
     update verification
     <set>
-      <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
+      <if test="qkey != null">
+        qkey = #{qkey,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        value = #{value,jdbcType=VARCHAR},
+      <if test="qvalue != null">
+        qvalue = #{qvalue,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="me.ilvc.wenda.model.Verification">
+  <update id="updateByPrimaryqkey" parameterType="me.ilvc.wenda.model.Verification">
     update verification
-    set key = #{key,jdbcType=VARCHAR},
-      value = #{value,jdbcType=VARCHAR}
+    set qkey = #{qkey,jdbcType=VARCHAR},
+      qvalue = #{qvalue,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

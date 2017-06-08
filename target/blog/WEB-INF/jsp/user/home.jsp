@@ -18,7 +18,7 @@
   <jsp:include page="../common/header.jsp"/>
 
 <div class="fly-home" style="background-image: url();">
-  <img src="{{info.avatar}}" alt="{{info.username}}">
+  <img src="${homeUser.avtar }" alt="${homeUser.username}">
   <h1>
     	${homeUser.username}
 
@@ -41,7 +41,7 @@
 
   <p class="fly-home-info">
     <i class="iconfont icon-zuichun" title="飞吻"></i><span style="color: #FF7200;"> 9999 飞吻</span>
-    <i class="iconfont icon-shijian"></i><span>${homeUser.jointime} 加入</span>
+    <i class="iconfont icon-shijian"></i><span> <fmt:formatDate value="${homeUser.jointime }" type="date" pattern="yyyy-MM-dd HH:mm"/> 加入</span>
     <i class="iconfont icon-chengshi"></i><span>来自 ${homeUser.city}<c:if test="${homeUser.city==null }">中国某城</c:if></span>
   </p>
 

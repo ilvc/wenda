@@ -33,9 +33,9 @@
     	 <!-- 登入后的状态 -->
      
       <a class="avatar" href="${pageContext.request.contextPath}/user/index.html">
-        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0">
-        <cite>贤心</cite>
-        <i>VIP2</i>
+        <img src="${currentUser.avtar}">
+        <cite>${currentUser.username}</cite>
+      <!--   <i>VIP2</i> -->
       </a>
       <div class="nav">
         <a href="${pageContext.request.contextPath}/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
@@ -85,7 +85,7 @@
       		
 	        <li class="fly-list-li">
 	          <a href="${pageContext.request.contextPath}/u/${question.user.username}" class="fly-list-avatar">
-	            <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+	            <img src="${question.user.avtar}" alt="${question.user.username}">
 	          </a>
 	          <h2 class="fly-tip">
 	            <a href="${pageContext.request.contextPath}/jie/detail/${quesion.questionId }">${question.questionTiltle}</a>
@@ -120,7 +120,7 @@
       		
 	        <li class="fly-list-li">
 	          <a href="${pageContext.request.contextPath}/u/${question.user.username}" class="fly-list-avatar">
-	            <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt="">
+	           <img src="${question.user.avtar}" alt="${question.user.username}">
 	          </a>
 	          <h2 class="fly-tip">
 	            <a href="${pageContext.request.contextPath}/jie/detail/${ question.questionId}">${question.questionTiltle}</a>
@@ -160,8 +160,8 @@
         
         <c:forEach items="${ans2top}" var="user" end="12">
         	 <dd>
-        	  <a href="${pageContext.request.contextPath}/user/${user.username}">
-            	<img src="resources/images/avatar/default.png">
+        	  <a href="${pageContext.request.contextPath}/u/${user.username}">
+            	<img src="${user.avtar}" alt="${user.username}">
             	<cite>${user.username }</cite>
            	   <i>${user.count}次回答</i>
          	  </a>

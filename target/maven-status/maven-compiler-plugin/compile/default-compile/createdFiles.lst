@@ -1,7 +1,6 @@
 me\ilvc\wenda\model\Category.class
 me\ilvc\wenda\model\Tags.class
 me\ilvc\wenda\model\Question.class
-me\ilvc\wenda\dao\VerificationMapper.class
 me\ilvc\wenda\model\Verification.class
 me\ilvc\wenda\model\User.class
 me\ilvc\wenda\model\Answer.class
