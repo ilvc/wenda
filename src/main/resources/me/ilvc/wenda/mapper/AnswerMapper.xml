@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.ilvc.wenda.dao.AnswerDao">
+  <resultMap id="BaseResultMap" type="me.ilvc.wenda.model.Answer">
+    <id column="answer_id" property="answerId"/>
+    <result column="add_time" property="addTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    answer_id, qustion_id, answer_content, add_time, agree_count, uid, comment_count, 
+    huifu_uid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from answer
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="Answer">
+    insert into answer (answer_id, qustion_id, answer_content, 
+      add_time, agree_count, uid, 
+      comment_count, huifu_uid)
+    values (#{answerId,jdbcType=INTEGER}, #{qustionId,jdbcType=INTEGER}, #{answerContent,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=DATE}, #{agreeCount,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{commentCount,jdbcType=INTEGER}, #{huifuUid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="me.ilvc.wenda.model.Answer">
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="qustionId != null">
+        qustion_id,
+      </if>
+      <if test="answerContent != null">
+        answer_content,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="agreeCount != null">
+        agree_count,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="huifuUid != null">
+        huifu_uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="qustionId != null">
+        #{qustionId,jdbcType=INTEGER},
+      </if>
+      <if test="answerContent != null">
+        #{answerContent,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=DATE},
+      </if>
+      <if test="agreeCount != null">
+        #{agreeCount,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="huifuUid != null">
+        #{huifuUid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.ilvc.wenda.model.Answer">
+    update answer
+    <set>
+      <if test="qustionId != null">
+        qustion_id = #{qustionId,jdbcType=INTEGER},
+      </if>
+      <if test="answerContent != null">
+        answer_content = #{answerContent,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=DATE},
+      </if>
+      <if test="agreeCount != null">
+        agree_count = #{agreeCount,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="huifuUid != null">
+        huifu_uid = #{huifuUid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.ilvc.wenda.model.Answer">
+    update answer
+    set qustion_id = #{qustionId,jdbcType=INTEGER},
+      answer_content = #{answerContent,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=DATE},
+      agree_count = #{agreeCount,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      huifu_uid = #{huifuUid,jdbcType=INTEGER}
+    where answer_id = #{answerId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- =====================  以上是自动生成的代码  ==================================== -->
+ 
+	
+	<resultMap id="resultQ2A" type="Answer">
+		<id column="answer_id" property="answerId" />
+		<result column="qustion_id" property="qustionId"/>
+		<result column="add_time" property="addTime"/>
+		<result column="answer_content" property="answerContent"/>
+		<result column="uid" property="uid"/>
+		<result column="agree_count" property="agreeCount"/>
+		<association property="formuser"  javaType="User">
+			<id column="uid" property="uid"/>
+			<result column="username" property="username"/>
+			<result column="email" property="email"/>
+			<result column="signature" property="signature"/>
+			<result column="avtar" property="avtar"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectQuestionOfAnswer" resultMap="resultQ2A">
+		SELECT a.answer_id ,a.qustion_id,a.answer_content,a.add_time,a.uid,a.agree_count,
+		u.username,u.email,u.signature,u.uid,u.avtar
+		FROM question q,question_answer qa,answer a,user u
+		WHERE q.question_id=a.qustion_id  and u.uid=a.uid and q.question_id=#{id}
+	</select>
+  
+	<!-- 通过id 查找  -->
+	<select id="getById" parameterType="Integer" resultType="me.ilvc.wenda.model.User">
+		SELECT * FROM USER WHERE uid=#{id};
+	</select>
+	<!-- 删删除一条数据 -->
+	<delete id="delete" parameterType="int" >
+		DELETE	FROM USER WHERE uid=#{id};
+	</delete>
+	
+	<!-- <insert id="insert">
+		
+	</insert> -->
+	
+	<!-- 更新一条数据 -->
+	<!--  <update id="update" parameterType="me.ilvc.wenda.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="avtar != null">
+        avtar = #{avtar,jdbcType=VARCHAR},
+      </if>
+      <if test="jointime != null">
+        joinTime = #{jointime},
+      </if>
+      <if test="lastlogintime != null">
+        lastLoginTime = #{lastlogintime},
+      </if>
+      <if test="onlinetime != null">
+        onlineTime = #{onlinetime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update> -->
+  	
+  <!-- <select id="listAll">
+  		
+  </select>
+  
+  <select id="countAll">
+  		
+  </select> -->
+  <!-- <select id="selectQuestionOfAnswer"  resultType="Answer">
+		SELECT a.answer_id ,a.qustion_id,a.answer_content,a.add_time,a.uid,a.agree_count,
+		u.username,u.email,u.signature,u.uid,u.avtar
+		FROM question q,question_answer qa,answer a,user u
+		WHERE q.question_id=a.qustion_id  and u.uid=a.uid and q.question_id=#{id}
+	</select>
+	 -->
+
+	
+</mapper>

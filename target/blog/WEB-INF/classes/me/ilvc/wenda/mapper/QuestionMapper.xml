@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.ilvc.wenda.dao.QuestionDao">
+
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="me.ilvc.wenda.model.Question">
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="questionTiltle != null">
+        question_tiltle,
+      </if>
+      <if test="publishedUid != null">
+        published_uid,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="anwerCount != null">
+        anwer_count,
+      </if>
+      <if test="viewCount != null">
+        view_count,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="questionContent != null">
+        question_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="questionTiltle != null">
+        #{questionTiltle,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedUid != null">
+        #{publishedUid,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="anwerCount != null">
+        #{anwerCount,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null">
+        #{questionContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.ilvc.wenda.model.Question">
+    update question
+    <set>
+      <if test="questionTiltle != null">
+        question_tiltle = #{questionTiltle,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedUid != null">
+        published_uid = #{publishedUid,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="anwerCount != null">
+        anwer_count = #{anwerCount,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null">
+        question_content = #{questionContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="me.ilvc.wenda.model.Question">
+    update question
+    set question_tiltle = #{questionTiltle,jdbcType=VARCHAR},
+      published_uid = #{publishedUid,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      anwer_count = #{anwerCount,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      category = #{category,jdbcType=INTEGER},
+      question_content = #{questionContent,jdbcType=LONGVARCHAR}
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.ilvc.wenda.model.Question">
+    update question
+    set question_tiltle = #{questionTiltle,jdbcType=VARCHAR},
+      published_uid = #{publishedUid,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      anwer_count = #{anwerCount,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      category = #{category,jdbcType=INTEGER}
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+
+<!-- =====================  以上是自动生成的代码  ==================================== -->
+	<resultMap type="Question" id="resultQuestion">
+		<id column="question_id" property="questionId"/>
+		<result column="question_tiltle" property="questionTiltle"/>
+		<result column="question_content" property="questionContent"/>
+		<result column="published_uid" property="publishedUid"/>
+		<result column="add_time" property="addTime"/>
+		<result column="update_time" property="updateTime"/>
+		<result column="anwer_count" property="anwerCount"/>
+		<result column="view_count" property="viewCount"/>
+		<result column="category_id" property="categoryId"/>
+		<result column="is_stick" property="isStick"/>
+		<result column="is_jing" property="isJing"/>
+		<result column="is_accept" property="isAccept"/>
+		<association property="user"  javaType="User">
+			<id column="uid" property="uid"/>
+			<result column="username" property="username"/>
+			<result column="email" property="email"/>
+			<result column="signature" property="signature"/>
+			<result column="avtar" property="avtar"/>
+		</association>
+		<association property="qCategory" javaType="Category" >
+			<id column="category_id" property="categoryId"/>
+			<result column="category_name" property="categoryName"/>
+		</association>
+		<collection property="qAnswer" column="question_id" ofType="Answer" javaType="ArrayList" select="selectQuestionOfAnswer"  />
+	</resultMap>
+	<!--  <sql id="Base_Column_List">
+    answer_id, qustion_id, answer_content, add_time, agree_count, uid, comment_count, 
+    huifu_uid
+  </sql> -->
+	<select id="selectQuestionOfAnswer" resultMap="resultQ2A">
+		SELECT a.answer_id ,a.qustion_id,a.answer_content,a.add_time,a.uid,a.agree_count,
+		u.username,u.email,u.signature,u.uid,u.avtar
+		FROM question q,question_answer qa,answer a,user u
+		WHERE q.question_id=a.qustion_id  and u.uid=a.uid and q.question_id=#{id}
+	</select>
+	
+	<resultMap id="resultQ2A" type="Answer">
+		<id column="answer_id" property="answerId" />
+		<result column="qustion_id" property="qustionId"/>
+		<result column="add_time" property="addTime"/>
+		<result column="answer_content" property="answerContent"/>
+		<result column="uid" property="uid"/>
+		<result column="agree_count" property="agreeCount"/>
+		<association property="formuser"  javaType="User">
+			<id column="uid" property="uid"/>
+			<result column="username" property="username"/>
+			<result column="email" property="email"/>
+			<result column="signature" property="signature"/>
+			<result column="avtar" property="avtar"/>
+		</association>
+	</resultMap>
+	<!-- 通过id 查找  -->
+	<select id="getById" parameterType="Integer" resultMap="resultQuestion">
+		SELECT 
+		 q.question_id ,q.question_tiltle,q.question_content,q.published_uid,q.add_time,q.update_time,
+		q.view_count,q.anwer_count,q.category_id,q.is_stick,q.is_jing,q.is_accept,
+		u.username,u.email,u.signature,u.uid,u.avtar,
+		c.category_id,c.category_name FROM USER u,question q,category c 
+		WHERE q.published_uid=u.uid AND q.category_id=c.category_id AND q.question_id=#{id};
+	</select>
+	
+	<!-- <select id="listAll" resultMap="resultQuestion">
+		SELECT a.answer_id ,a.qustion_id,a.answer_content,a.add_time,a.uid,a.agree_count,
+		u.username,u.email,u.signature,u.uid,u.avtar
+		FROM question q,question_answer qa,answer a,user u
+		WHERE q.question_id=a.qustion_id  and u.uid=a.uid and q.question_id=#{id}
+	</select> -->
+	
+	<select id="getBystate" parameterType="Question" resultMap="resultQuestion">
+   SELECT 
+		 q.question_id ,q.question_tiltle,q.question_content,q.published_uid,q.add_time,q.update_time,
+		q.view_count,q.anwer_count,q.category_id,q.is_stick,q.is_jing,q.is_accept,
+		u.username,u.email,u.signature,u.uid,u.avtar,
+		c.category_id,c.category_name FROM USER u,question q,category c 
+		WHERE q.published_uid=u.uid AND q.category_id=c.category_id 
+		<if test="isStick!=null">
+			AND  q.is_stick=#{isStick}
+		</if>
+		<if test="isJing!=null">
+			AND  q.is_jing=#{isJing}
+		</if>
+		<if test="isAccept!=null">
+			and q.is_accept=#{isAccept}
+		</if>
+		order by q.add_time desc
+		
+  </select>
+	
+	
+	<!-- 删删除一条数据 -->
+	<delete id="delete" parameterType="int" >
+		DELETE	FROM question WHERE question_id=#{id};
+	</delete>
+	
+	<insert id="insert">
+			 insert into question
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	      <if test="questionId != null">
+	        question_id,
+	      </if>
+	      <if test="questionTiltle != null">
+	        question_tiltle,
+	      </if>
+	      <if test="publishedUid != null">
+	        published_uid,
+	      </if>
+	      <if test="addTime != null">
+	        add_time,
+	      </if>
+	      <if test="updateTime != null">
+	        update_time,
+	      </if>
+	      <if test="anwerCount != null">
+	        anwer_count,
+	      </if>
+	      <if test="viewCount != null">
+	        view_count,
+	      </if>
+	      <if test="categoryId != null">
+	        category_id,
+	      </if>
+	      <if test="questionContent != null">
+	        question_content,
+	      </if>
+	       <if test="isStick != null">
+	        is_stick,
+	      </if>
+	       <if test="isJing != null">
+	        is_jing,
+	      </if>
+	       <if test="isAccept != null">
+	        is_accept,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="questionId != null">
+	        #{questionId,jdbcType=INTEGER},
+	      </if>
+	      <if test="questionTiltle != null">
+	        #{questionTiltle,jdbcType=VARCHAR},
+	      </if>
+	      <if test="publishedUid != null">
+	        #{publishedUid,jdbcType=INTEGER},
+	      </if>
+	      <if test="addTime != null">
+	        now(),
+	      </if>
+	      <if test="updateTime != null">
+	        now(),
+	      </if>
+	      <if test="anwerCount != null">
+	       0,
+	      </if>
+	      <if test="viewCount != null">
+	        0,
+	      </if>
+	      <if test="categoryId != null">
+	        #{categoryId,jdbcType=INTEGER},
+	      </if>
+	      <if test="questionContent != null">
+	        #{questionContent,jdbcType=LONGVARCHAR},
+	      </if>
+	      <if test="isStick != null">
+	        0,
+	      </if>
+	       <if test="isJing != null">
+	   		  0,
+	      </if>
+	       <if test="isAccept != null">
+	          0,
+	      </if>
+	    </trim>
+	</insert>
+	
+	<!-- 更新一条数据 -->
+	 <update id="update" parameterType="me.ilvc.wenda.model.Question">
+   update question
+    <set>
+      <if test="questionTiltle != null">
+        question_tiltle = #{questionTiltle,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedUid != null">
+        published_uid = #{publishedUid,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="anwerCount != null">
+        anwer_count = #{anwerCount,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=INTEGER},
+      </if>
+      <if test="questionContent != null">
+        question_content = #{questionContent,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="isStick != null">
+	     is_stick=#{isStick,jdbcType=Integer},
+	   </if>
+	   <if test="isJing != null">
+	   	  is_jing=#{isJing,jdbcType=Integer},
+	   </if>
+       <if test="isAccept != null">
+	        is_accept= #{isAccept,jdbcType=Integer},
+	   </if>
+    </set>
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+  	
+  <select id="listAll" resultMap="resultQuestion">
+  		SELECT 
+		 q.question_id ,q.question_content,q.published_uid,q.add_time,q.update_time,q.question_tiltle,
+		q.view_count,q.anwer_count,q.category_id,q.is_stick,q.is_jing,q.is_accept,
+		u.username,u.email,u.signature,u.uid,u.avtar,
+		c.category_id,c.category_name
+		FROM USER u ,question q,category c 
+		WHERE q.published_uid=u.uid AND q.category_id=c.category_id order by q.add_time desc ;
+  </select> 
+  
+  <select id="listAllCommon" resultMap="resultQuestion" >
+  		SELECT 
+		 q.question_id ,q.question_content,q.published_uid,q.add_time,q.update_time,q.question_tiltle,
+		q.view_count,q.anwer_count,q.category_id,q.is_stick,q.is_jing,q.is_accept,
+		u.username,u.email,u.signature,u.uid,u.avtar,
+		c.category_id,c.category_name
+		FROM USER u ,question q,category c 
+		WHERE q.published_uid=u.uid AND q.category_id=c.category_id 
+		
+		 <if test="question.isStick!=null ">
+		 	and q.is_stick=#{question.isStick}
+		 </if>
+		 <if test="question.isJing!=null ">
+		 	and q.is_jing=#{question.isJing}
+		 </if>
+		 <if test="question.isAccept!=null ">
+		 	and q.is_accept=#{question.isAccept}
+		 </if>
+		 
+		order by  q.is_stick desc,
+		 <if test="question.viewCount!=null ">
+		 	 q.view_count desc,
+		 </if>
+		  <if test="question.anwerCount!=null ">
+		 	 q.anwer_count desc,
+		 </if>
+		 <if test="question.isAccept!=null ">
+		 	q.is_accept desc,
+		 </if>
+		 	 q.add_time desc 
+		<if test="pageBean=!null">
+			limit #{pageBean.start},#{pageBean.pageSize}
+		</if>
+		
+  </select>
+  
+  
+  <select id="countAll" resultType="Integer">
+  		select count(*) from question 
+  </select>
+  
+</mapper>

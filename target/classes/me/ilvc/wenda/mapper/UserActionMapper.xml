@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.ilvc.wenda.dao.UserActionDao">
+  <resultMap id="BaseResultMap" type="me.ilvc.wenda.model.UserAction">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="qustion_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="uid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="answer_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="add_time" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, qustion_id, uid, answer_id, type, add_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_action
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_action
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="me.ilvc.wenda.model.UserAction">
+    insert into user_action (id, qustion_id, uid, 
+      answer_id, type, add_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{qustionId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{answerId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{addTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="me.ilvc.wenda.model.UserAction">
+    insert into user_action
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="qustionId != null">
+        qustion_id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qustionId != null">
+        #{qustionId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="answerId != null">
+        #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.ilvc.wenda.model.UserAction">
+    update user_action
+    <set>
+      <if test="qustionId != null">
+        qustion_id = #{qustionId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="answerId != null">
+        answer_id = #{answerId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.ilvc.wenda.model.UserAction">
+    update user_action
+    set qustion_id = #{qustionId,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      answer_id = #{answerId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+<!-- =====================  以上是自动生成的代码  ==================================== -->
+	<!-- 通过id 查找  -->
+	<select id="getById" parameterType="Integer" resultType="me.ilvc.wenda.model.User">
+		SELECT * FROM USER WHERE uid=#{id};
+	</select>
+	<!-- 删删除一条数据 -->
+	<delete id="delete" parameterType="int" >
+		DELETE	FROM USER WHERE uid=#{id};
+	</delete>
+	
+	<!-- <insert id="insert">
+		
+	</insert> -->
+	
+	<!-- 更新一条数据 -->
+	 <update id="update" parameterType="me.ilvc.wenda.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="avtar != null">
+        avtar = #{avtar,jdbcType=VARCHAR},
+      </if>
+      <if test="jointime != null">
+        joinTime = #{jointime},
+      </if>
+      <if test="lastlogintime != null">
+        lastLoginTime = #{lastlogintime},
+      </if>
+      <if test="onlinetime != null">
+        onlineTime = #{onlinetime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  	
+  <select id="listAll">
+  		
+  </select>
+  
+  <select id="countAll">
+  		
+  </select>
+  
+
+
+</mapper>
