@@ -32,7 +32,7 @@
 		<property name="username" value="root"/>
 		<property name="password" value="lvc159357"/>
 	</bean>
-	<!-- <property name="password" value="Lvc19950403"/> -->
+	
 	<!-- 配置mybatis的sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
